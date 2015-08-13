@@ -1,5 +1,5 @@
 # KISSViewer
-A KISS image viewer made for OSX
+A KISS image viewer made for OSX 
 
 ### Features:
 - A borderless rounded image window
