@@ -42,6 +42,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         promptToOpen();
     }
     
+    // When the user clicks the Browse button in the open file panel
+    @IBAction func browseButtonPressed(sender: AnyObject) {
+        // Open the modal
+        openPanel.runModal();
+        
+        // If the URL isnt nil...
+        if(openPanel.URL != nil) {
+            // Set the file path field value to the url we selected. We first remove file:// , and then we replace %20 with " "
+            filePathField.stringValue = openPanel.URL!.absoluteString!.substringWithRange(Range<String.Index>(start: advance(openPanel.URL!.absoluteString!.startIndex, 7), end: advance(openPanel.URL!.absoluteString!.endIndex, 0))).stringByReplacingOccurrencesOfString("%20", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil);
+        }
+    }
+    
     // When the open button in the openFileWinodw is pressed...
     @IBAction func openButtonPressed(sender: AnyObject) {
         // Hide the open file window
@@ -112,7 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // Create new image viewer window with or variables
-        createNewViewer(NSURL(fileURLWithPath: filePathField.stringValue)!, windowControls: windowControlsState, floats: windowFloatsState, joins: windowJoinState, shadow: windowShadowState, clickThrough: windowClickThroughState, bgColor: windowBackgroundColorWell.color);
+        createNewViewer(filePathField.stringValue, windowControls: windowControlsState, floats: windowFloatsState, joins: windowJoinState, shadow: windowShadowState, clickThrough: windowClickThroughState, bgColor: windowBackgroundColorWell.color);
     }
     
     // An array of all the opened windows
@@ -127,11 +139,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // A temp variable to temporaroly store our new image view
     var newImage : NSImage = NSImage();
     
+    // The modal that is shown when the user is opening an image
+    var openPanel : NSOpenPanel = NSOpenPanel();
+    
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Hide the file open window
         openFileWindow.orderOut(self);
         
-        openFileWindow.titlebarAppearsTransparent = true;
+        // Set the open panels allowed file types to only images
+        openPanel.allowedFileTypes = ["png", "tiff", "jpg", "gif", "jpeg"];
         
         // Allow the user to input a color with an alpha value
         NSColorPanel.sharedColorPanel().showsAlpha = true;
@@ -147,16 +163,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     // Creates a new image viewer window
-    // url (NSURL): The URL to the image to open
+    // url (String): The path to the image to open
     // windowControls (Bool): Should the window show the traffic lights?
     // floats (Bool): Should the iwndow float above the others?
     // joins (Bool): Should the window move to the active space?
     // shadow (Bool): Shoudl the window have a shadow?
     // clickThrough (Bool): Can the user click through the window?
     // bgColor (NSColor): The color to put for parts of the image that are transparent
-    func createNewViewer(url : NSURL, windowControls : Bool, floats : Bool, joins : Bool, shadow : Bool, clickThrough : Bool, bgColor : NSColor) {
-        // Create the new NSImage to hold our image we are loading
-        newImage = NSImage(contentsOfURL: url)!;
+    func createNewViewer(url : String, windowControls : Bool, floats : Bool, joins : Bool, shadow : Bool, clickThrough : Bool, bgColor : NSColor) {
+        
+        // If the url is on a server (Starts with http)
+        if(url.substringWithRange(Range<String.Index>(start: advance(url.startIndex, 0), end: advance(url.startIndex, 4))) == "http") {
+            // Load it as an online image
+            
+            // Create the new NSImage to hold our image we are loading
+            newImage = NSImage(contentsOfURL: NSURL(string: url)!)!;
+        }
+        else {
+            // Load it as a regular image
+            
+            // Create the new NSImage to hold our image we are loading
+            newImage = NSImage(contentsOfURL: NSURL(fileURLWithPath: url)!)!;
+        }
         
         // Add a new NSImageView to the array, to show the NSImage
         imageViewArray.append(NSImageView(frame: NSRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height)));
@@ -231,7 +259,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         windowArray[currentWindow].setFrame(NSRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height), display: false);
         
         // Get the file extension
-        var imageNameAndExtension : String = url.lastPathComponent!;
+        var imageNameAndExtension : String = url.lastPathComponent;
         var imageNameAndExtensionSplit : [String] = split(imageNameAndExtension){$0 == "."}
         var imageExtension : String = imageNameAndExtensionSplit[imageNameAndExtensionSplit.count - 1];
         

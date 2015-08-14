@@ -358,7 +358,7 @@
                         <rect key="frame" x="-50" y="-44" width="578" height="304"/>
                     </visualEffectView>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-kh-KlD">
-                        <rect key="frame" x="10" y="164" width="460" height="20"/>
+                        <rect key="frame" x="10" y="164" width="366" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Image Path" drawsBackground="YES" id="OeC-tz-8zW">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -422,6 +422,16 @@
                         <rect key="frame" x="147" y="134" width="38" height="20"/>
                         <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     </colorWell>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fl-Qr-84i">
+                        <rect key="frame" x="378" y="157" width="98" height="32"/>
+                        <buttonCell key="cell" type="push" title="Browse..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZbY-ru-6Sd">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="browseButtonPressed:" target="Voe-Tx-rLC" id="4oE-g5-fXe"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <point key="canvasLocation" x="110" y="223"/>

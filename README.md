@@ -9,6 +9,5 @@ A KISS image viewer made for OSX
 ### TODO:
 
 - Better GIF support (NSImageView is bad with GIFS)
-- Open online images
 - Open a folder of images (Scroll through them)
-- Open image from command line
+- Open image from command line (May not work)
