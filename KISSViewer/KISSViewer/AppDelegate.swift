@@ -53,8 +53,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    var testBool : Bool = false;
-    
     // When the open button in the openFileWinodw is pressed...
     @IBAction func openButtonPressed(sender: AnyObject) {
         // Hide the open file window
@@ -238,8 +236,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             windowArray[currentWindow].level = 200;
         }
         
+        println(joins);
         // If we said for the window to move tp the active space...
         if(joins) {
+            println("Joining");
             // Set the collection behaviour to can join all spaces
             windowArray[currentWindow].collectionBehavior = NSWindowCollectionBehavior.CanJoinAllSpaces;
         }
@@ -276,7 +276,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // Make the window participate in the window cycling
-        windowArray[currentWindow].collectionBehavior = NSWindowCollectionBehavior.ParticipatesInCycle;
+        windowArray[currentWindow].collectionBehavior |= NSWindowCollectionBehavior.ParticipatesInCycle;
         
         // Set the window aspect ratio to that of the image, so we can scale the window nicely
         windowArray[currentWindow].contentAspectRatio = NSSize(width: newImage.size.width, height: newImage.size.height);
@@ -353,10 +353,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
-    }
-    
-    func applicationWillUpdate(notification: NSNotification) {
-        println(testBool);
     }
 }
 
