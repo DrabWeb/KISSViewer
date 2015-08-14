@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import WebKit
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -53,6 +52,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             filePathField.stringValue = openPanel.URL!.absoluteString!.substringWithRange(Range<String.Index>(start: advance(openPanel.URL!.absoluteString!.startIndex, 7), end: advance(openPanel.URL!.absoluteString!.endIndex, 0))).stringByReplacingOccurrencesOfString("%20", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil);
         }
     }
+    
+    var testBool : Bool = false;
     
     // When the open button in the openFileWinodw is pressed...
     @IBAction func openButtonPressed(sender: AnyObject) {
@@ -274,6 +275,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             windowArray[currentWindow].contentMaxSize = NSSize(width: newImage.size.width, height: newImage.size.height);
         }
         
+        // Make the window participate in the window cycling
+        windowArray[currentWindow].collectionBehavior = NSWindowCollectionBehavior.ParticipatesInCycle;
+        
         // Set the window aspect ratio to that of the image, so we can scale the window nicely
         windowArray[currentWindow].contentAspectRatio = NSSize(width: newImage.size.width, height: newImage.size.height);
         
@@ -302,8 +306,57 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         currentWindow += 1;
     }
     
+    // Changes the image of the given imageView, and resizes the parent window to fit
+    // imageView (NSImageView): the image view to change the image of
+    // url (String): The URL to the new image
+    // window (NSWindow): The window that the image view is in
+    func changeImage(imageView : NSImageView, url : String, window : NSWindow) {
+        // If the url is on a server (Starts with http)
+        if(url.substringWithRange(Range<String.Index>(start: advance(url.startIndex, 0), end: advance(url.startIndex, 4))) == "http") {
+            // Load it as an online image
+            
+            // Create the new NSImage to hold our image we are loading
+            newImage = NSImage(contentsOfURL: NSURL(string: url)!)!;
+        }
+        else {
+            // Load it as a regular image
+            
+            // Create the new NSImage to hold our image we are loading
+            newImage = NSImage(contentsOfURL: NSURL(fileURLWithPath: url)!)!;
+        }
+        
+        // Set the new image view's image to our new image we are loading
+        imageView.image = newImage;
+        
+        // Set the window size to the image size in pixels
+        window.setFrame(NSRect(x: 0, y: 0, width: newImage.size.width, height: newImage.size.height), display: false);
+        
+        // Get the file extension
+        var imageNameAndExtension : String = url.lastPathComponent;
+        var imageNameAndExtensionSplit : [String] = split(imageNameAndExtension){$0 == "."}
+        var imageExtension : String = imageNameAndExtensionSplit[imageNameAndExtensionSplit.count - 1];
+        
+        // If its not a GIF...
+        if(imageExtension != "gif") {
+            // Set the max size to 2x
+            windowArray[currentWindow].contentMaxSize = NSSize(width: newImage.size.width * 2, height: newImage.size.height * 2);
+        }
+        else {
+            // It is a gif, make the window unsizable
+            window.contentMinSize = NSSize(width: newImage.size.width, height: newImage.size.height);
+            window.contentMaxSize = NSSize(width: newImage.size.width, height: newImage.size.height);
+        }
+        
+        // Set the window aspect ratio to that of the image, so we can scale the window nicely
+        window.contentAspectRatio = NSSize(width: newImage.size.width, height: newImage.size.height);
+    }
+    
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
+    }
+    
+    func applicationWillUpdate(notification: NSNotification) {
+        println(testBool);
     }
 }
 
