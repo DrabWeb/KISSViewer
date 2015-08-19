@@ -1,5 +1,5 @@
 # KISSViewer
-A KISS image viewer made for OSX 
+A KISS image viewer made for OSX. This is a sort of base for image viewers, as it is very minimal and barebones.
 
 ### Features:
 - A borderless rounded image window
@@ -9,5 +9,3 @@ A KISS image viewer made for OSX
 ### TODO:
 
 - Better GIF support (NSImageView is bad with GIFS)
-- Open a folder of images (Scroll through them)
-- Open image from command line (May not work)

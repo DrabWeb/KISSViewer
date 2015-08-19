@@ -142,6 +142,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var openPanel : NSOpenPanel = NSOpenPanel();
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
+        
         // Hide the file open window
         openFileWindow.orderOut(self);
         
