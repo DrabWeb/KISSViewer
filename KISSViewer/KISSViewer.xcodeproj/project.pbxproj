@@ -152,6 +152,8 @@
 		5D9BEC951B7CFFBE0033BC26 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = DrabWeb;
 				TargetAttributes = {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -13,14 +13,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="KISSViewer" customModuleProvider="target">
             <connections>
-                <outlet property="filePathField" destination="rX0-kh-KlD" id="FA4-yp-i0j"/>
-                <outlet property="openFileWindow" destination="DvD-Tx-Z1a" id="YFG-yt-4T3"/>
-                <outlet property="windowBackgroundColorWell" destination="nWV-xi-6cl" id="wBH-eM-keP"/>
-                <outlet property="windowClickThroughCheckbox" destination="3WM-aI-i0K" id="KRM-GG-0eE"/>
-                <outlet property="windowControlsCheckbox" destination="cXr-RM-6kG" id="tsA-G2-5pE"/>
-                <outlet property="windowFloatsCheckbox" destination="lOl-Gq-Lgm" id="RpG-Ef-KUb"/>
-                <outlet property="windowJoinCheckbox" destination="Fwz-cX-m5H" id="WbP-fw-RCE"/>
-                <outlet property="windowShadowCheckbox" destination="0uJ-YG-BTZ" id="Mbi-Wq-GN2"/>
+                <outlet property="imageView" destination="b4i-Qc-XiU" id="J1t-bb-GdL"/>
+                <outlet property="visualEffectView" destination="FnF-M0-aR2" id="CdH-QU-eFc"/>
+                <outlet property="window" destination="abX-uW-wjP" id="T4u-4o-Whz"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -74,12 +69,6 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
-                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
-                                <connections>
-                                    <action selector="openMenuItemTriggered:" target="Voe-Tx-rLC" id="Sav-ng-Wd5"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                 <connections>
                                     <action selector="performClose:" target="-1" id="HmO-Ls-i7Q"/>
@@ -323,6 +312,22 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                            <menuItem title="Float" keyEquivalent="f" id="K9G-rm-oBc">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                            </menuItem>
+                            <menuItem title="Click Through" keyEquivalent="t" id="I5w-wT-eAK">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                            </menuItem>
+                            <menuItem title="Connect Spaces" keyEquivalent="s" id="6Ki-vX-kkG">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                            </menuItem>
+                            <menuItem title="Shadow" state="on" keyEquivalent="q" id="G9G-Nq-lnw">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                            </menuItem>
+                            <menuItem title="Invisible Background" keyEquivalent="b" id="f4r-tn-7fc">
+                                <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="U64-Vf-sJt"/>
                             <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -346,95 +351,39 @@
                 </menuItem>
             </items>
         </menu>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="documentWindow" id="DvD-Tx-Z1a">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" fullSizeContentView="YES"/>
-            <rect key="contentRect" x="152" y="158" width="480" height="216"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1600" height="877"/>
-            <view key="contentView" id="Vw0-zk-Gfm">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="216"/>
+        <window title="Image" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="utilityWindow" id="abX-uW-wjP">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
+            <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="152" y="158" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1600" height="900"/>
+            <view key="contentView" id="fiM-GN-6PR">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <visualEffectView appearanceType="vibrantDark" fixedFrame="YES" blendingMode="behindWindow" material="light" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="KQv-Ix-p3Q">
-                        <rect key="frame" x="-50" y="-44" width="578" height="304"/>
+                    <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="FnF-M0-aR2">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <animations/>
                     </visualEffectView>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rX0-kh-KlD">
-                        <rect key="frame" x="10" y="164" width="366" height="20"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Image Path" drawsBackground="YES" id="OeC-tz-8zW">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fwz-cX-m5H">
-                        <rect key="frame" x="8" y="107" width="462" height="20"/>
-                        <buttonCell key="cell" type="check" title="Move To Active Space" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="feO-6p-K6y">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lOl-Gq-Lgm">
-                        <rect key="frame" x="8" y="81" width="462" height="20"/>
-                        <buttonCell key="cell" type="check" title="Float" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="DwG-QW-6WD">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3WM-aI-i0K">
-                        <rect key="frame" x="8" y="31" width="462" height="20"/>
-                        <buttonCell key="cell" type="check" title="Can Click Through" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="ruv-Gh-itZ">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0uJ-YG-BTZ">
-                        <rect key="frame" x="8" y="56" width="462" height="20"/>
-                        <buttonCell key="cell" type="check" title="Window Shadow" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="5fQ-IZ-TnX">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
-                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cXr-RM-6kG">
-                        <rect key="frame" x="8" y="6" width="462" height="20"/>
-                        <buttonCell key="cell" type="check" title="Window Controls" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="cGv-jt-mj1">
-                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NN-wP-cDU">
-                        <rect key="frame" x="394" y="1" width="82" height="32"/>
-                        <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="qwU-iL-YEP">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="openButtonPressed:" target="Voe-Tx-rLC" id="U8g-AQ-25r"/>
-                        </connections>
-                    </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pva-Eq-shK">
-                        <rect key="frame" x="8" y="134" width="141" height="20"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Window Background" id="MKq-Oj-h3X">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nWV-xi-6cl">
-                        <rect key="frame" x="147" y="134" width="38" height="20"/>
-                        <color key="color" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
-                    </colorWell>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fl-Qr-84i">
-                        <rect key="frame" x="378" y="157" width="98" height="32"/>
-                        <buttonCell key="cell" type="push" title="Browse..." bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZbY-ru-6Sd">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="browseButtonPressed:" target="Voe-Tx-rLC" id="4oE-g5-fXe"/>
-                        </connections>
-                    </button>
+                    <imageView focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="b4i-Qc-XiU">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <animations/>
+                        <imageCell key="cell" refusesFirstResponder="YES" focusRingType="none" alignment="left" animates="YES" imageScaling="proportionallyUpOrDown" id="mMS-Iu-BRn"/>
+                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="FnF-M0-aR2" secondAttribute="trailing" id="2Ke-ZN-fq9"/>
+                    <constraint firstItem="b4i-Qc-XiU" firstAttribute="leading" secondItem="fiM-GN-6PR" secondAttribute="leading" id="Dws-wh-J13"/>
+                    <constraint firstItem="FnF-M0-aR2" firstAttribute="top" secondItem="fiM-GN-6PR" secondAttribute="top" id="EEq-qB-ZJ0"/>
+                    <constraint firstItem="FnF-M0-aR2" firstAttribute="leading" secondItem="fiM-GN-6PR" secondAttribute="leading" id="LZM-u7-IMR"/>
+                    <constraint firstAttribute="bottom" secondItem="b4i-Qc-XiU" secondAttribute="bottom" id="Mr0-YZ-NMw"/>
+                    <constraint firstItem="b4i-Qc-XiU" firstAttribute="top" secondItem="fiM-GN-6PR" secondAttribute="top" id="bTl-te-OKi"/>
+                    <constraint firstAttribute="bottom" secondItem="FnF-M0-aR2" secondAttribute="bottom" id="c0H-QL-0AP"/>
+                    <constraint firstAttribute="trailing" secondItem="b4i-Qc-XiU" secondAttribute="trailing" id="ud9-Hr-yXR"/>
+                </constraints>
+                <animations/>
             </view>
-            <point key="canvasLocation" x="110" y="223"/>
+            <point key="canvasLocation" x="-237" y="-121"/>
         </window>
     </objects>
 </document>

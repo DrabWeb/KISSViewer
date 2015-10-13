@@ -1,0 +1,35 @@
+#!/bin/bash
+# $1 - Image URL
+# $2 - Float
+# $3 - Click Through
+# $4 - Connect Spaces
+# $5 - Shadow
+# $6 - Window background transparent
+# $7 - Image size (1 being the original image size, so 0.5 would be half ETC)
+
+# Set all the variables
+IMAGEURL="$1"
+WINDOWFLOAT="$2"
+WINDOWCLICKTHROUGH="$3"
+WINDOWCONNECTSPACES="$4"
+WINDOWSHADOW="$5"
+WINDOWTRANSPARENTBACKGROUND="$6"
+WINDOWSIZE="$7"
+
+# Set this to the applciation bundle for KISSViewer
+APPLICATIONPATH="/Volumes/Storage/Applications/Selftilities/KISSViewer.app"
+
+# Delete any old /tmp/ file we had
+rm -r /tmp/kissviewer
+
+# Write all the values into /tmp/kissviewer
+echo -e "$IMAGEURL\n$WINDOWFLOAT\n$WINDOWCLICKTHROUGH\n$WINDOWCONNECTSPACES\n$WINDOWSHADOW\n$WINDOWTRANSPARENTBACKGROUND\n$WINDOWSIZE" > "/tmp/kissviewer"
+
+# Open a new instance of KISSWebViewer
+open -n "$APPLICATIONPATH"
+
+# Sleep for 1 second
+sleep 1
+
+# Delete the /tmp/kissviewer file, so if we open it again from the bundle, it doesnt load like it was opened from the terminal
+rm -r /tmp/kissviewer
