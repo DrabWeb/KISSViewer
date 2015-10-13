@@ -9,6 +9,11 @@ A KISS image viewer for OSX.
 - Transparent window backgrounds
 
 ### Usage
+
+#### GUI
+Just run the app bundle, and you will be prompted to open a file
+
+#### Command Line
 1. Copy Command Line / kissviewer to somewhere you can access it easily (Probably in your PATH)
 2. Edit it so that APPLICATIONPATH is the path to the KISSViewer.app bundle
 3. Run kissviewer from the command line (The variables are explained in the bash script)
