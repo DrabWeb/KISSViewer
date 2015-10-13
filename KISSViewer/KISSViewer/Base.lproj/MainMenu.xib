@@ -13,7 +13,13 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="KISSViewer" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundMenuItem" destination="f4r-tn-7fc" id="bVK-AM-NTk"/>
+                <outlet property="clickThroughMenuItem" destination="I5w-wT-eAK" id="owf-pe-0nI"/>
+                <outlet property="connectSpacesMenuItem" destination="6Ki-vX-kkG" id="t2z-ac-31b"/>
+                <outlet property="floatMenuItem" destination="K9G-rm-oBc" id="t9b-U7-W7t"/>
                 <outlet property="imageView" destination="b4i-Qc-XiU" id="J1t-bb-GdL"/>
+                <outlet property="shadowMenuItem" destination="G9G-Nq-lnw" id="xMq-en-XNv"/>
+                <outlet property="shadowMenuItemTriggered" destination="G9G-Nq-lnw" id="HkV-tM-T46"/>
                 <outlet property="visualEffectView" destination="FnF-M0-aR2" id="CdH-QU-eFc"/>
                 <outlet property="window" destination="abX-uW-wjP" id="T4u-4o-Whz"/>
             </connections>
@@ -314,18 +320,33 @@
                             <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                             <menuItem title="Float" keyEquivalent="f" id="K9G-rm-oBc">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="floatMenuItemTriggered:" target="Voe-Tx-rLC" id="vAj-Dd-sCg"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Click Through" keyEquivalent="t" id="I5w-wT-eAK">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="clickThroughMenuItemTriggered:" target="Voe-Tx-rLC" id="6NJ-Bz-kTw"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Connect Spaces" keyEquivalent="s" id="6Ki-vX-kkG">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="connectSpacesMenuItemTriggered:" target="Voe-Tx-rLC" id="dSg-KB-ugE"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Shadow" state="on" keyEquivalent="q" id="G9G-Nq-lnw">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="shadowMenuItemTriggered:" target="Voe-Tx-rLC" id="bem-fM-12I"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Invisible Background" keyEquivalent="b" id="f4r-tn-7fc">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                <connections>
+                                    <action selector="backgroundMenuItemTriggered:" target="Voe-Tx-rLC" id="HlM-nx-rq4"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="U64-Vf-sJt"/>
                             <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
@@ -361,7 +382,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="FnF-M0-aR2">
+                    <visualEffectView appearanceType="vibrantLight" blendingMode="behindWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="FnF-M0-aR2">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <animations/>
                     </visualEffectView>

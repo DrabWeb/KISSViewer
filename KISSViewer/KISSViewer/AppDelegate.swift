@@ -34,6 +34,77 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // The modal that is shown when the user is opening an image
     var openPanel : NSOpenPanel = NSOpenPanel();
+    
+    // Menu items
+    
+    // Float
+    @IBOutlet weak var floatMenuItem: NSMenuItem!
+    @IBAction func floatMenuItemTriggered(sender: AnyObject) {
+        if(window.level == 250) {
+            window.level = 0;
+            floatMenuItem.state = 1;
+        }
+        else {
+            window.level = 250;
+            floatMenuItem.state = 0;
+        }
+    }
+    
+    // Click through
+    @IBOutlet weak var clickThroughMenuItem: NSMenuItem!
+    @IBAction func clickThroughMenuItemTriggered(sender: AnyObject) {
+        if(window.ignoresMouseEvents) {
+            window.ignoresMouseEvents = false;
+            clickThroughMenuItem.state = 0;
+        }
+        else {
+            window.ignoresMouseEvents = true;
+            clickThroughMenuItem.state = 1;
+        }
+    }
+    
+    // Connect spaces
+    @IBOutlet weak var connectSpacesMenuItem: NSMenuItem!
+    @IBAction func connectSpacesMenuItemTriggered(sender: AnyObject) {
+        if(window.collectionBehavior == NSWindowCollectionBehavior.CanJoinAllSpaces) {
+            window.collectionBehavior = NSWindowCollectionBehavior.Default;
+            connectSpacesMenuItem.state = 0;
+        }
+        else {
+            window.collectionBehavior = NSWindowCollectionBehavior.CanJoinAllSpaces;
+            connectSpacesMenuItem.state = 1;
+        }
+    }
+    
+    // Shadow
+    @IBOutlet weak var shadowMenuItem: NSMenuItem!
+    @IBAction func shadowMenuItemTriggered(sender: AnyObject) {
+        if(window.hasShadow) {
+            window.hasShadow = false;
+            shadowMenuItem.state = 0;
+        }
+        else {
+            window.hasShadow = true;
+            shadowMenuItem.state = 1;
+        }
+    }
+    
+    // Clear background
+    @IBOutlet weak var backgroundMenuItem: NSMenuItem!
+    @IBAction func backgroundMenuItemTriggered(sender: AnyObject) {
+        if(window.backgroundColor == NSColor.clearColor()) {
+            window.backgroundColor = NSColor.whiteColor();
+            visualEffectView.hidden = false;
+            window.opaque = true;
+            backgroundMenuItem.state = 0;
+        }
+        else {
+            window.backgroundColor = NSColor.clearColor();
+            visualEffectView.hidden = true;
+            window.opaque = false;
+            backgroundMenuItem.state = 1;
+        }
+    }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
@@ -61,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             var image : NSImage = NSImage(contentsOfURL: openPanel.URL!)!;
             
             // Open the image
-            openImage(image, clearBackground: true);
+            openImage(image, clearBackground: false);
         }
     }
     
