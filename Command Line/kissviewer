@@ -22,6 +22,22 @@ APPLICATIONPATH="/Volumes/Storage/Applications/Selftilities/KISSViewer.app"
 # Delete any old /tmp/ file we had
 rm -r /tmp/kissviewer
 
+# Check if we are trying to load a online image
+
+# Get the first four letters of the string
+IMAGESCHEME=${IMAGEURL:0:4}
+
+# Its pretty safe to assume that if the first 4 letters are http, its online.
+if [[ $IMAGESCHEME == "http" ]]; then
+	# Curl the image (I would use wget, but OSX doesnt have it by default.)
+	curl -o /tmp/kissviewer-image $IMAGEURL
+
+	# Set the image url to the newly doenloaded file
+	IMAGEURL="/tmp/kissviewer-image"
+fi
+
+echo $IMAGESCHEME
+
 # Write all the values into /tmp/kissviewer
 echo -e "$IMAGEURL\n$WINDOWFLOAT\n$WINDOWCLICKTHROUGH\n$WINDOWCONNECTSPACES\n$WINDOWSHADOW\n$WINDOWTRANSPARENTBACKGROUND\n$WINDOWSIZE" > "/tmp/kissviewer"
 
@@ -31,5 +47,6 @@ open -n "$APPLICATIONPATH"
 # Sleep for 1 second
 sleep 1
 
-# Delete the /tmp/kissviewer file, so if we open it again from the bundle, it doesnt load like it was opened from the terminal
+# Delete the /tmp/kissviewer and /tmp/kissviewer-image file, so if we open it again from the bundle, it doesnt load like it was opened from the terminal
 rm -r /tmp/kissviewer
+rm -r /tmp/kissviewer-image
