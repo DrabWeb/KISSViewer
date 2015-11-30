@@ -18,6 +18,8 @@
                 <outlet property="connectSpacesMenuItem" destination="6Ki-vX-kkG" id="t2z-ac-31b"/>
                 <outlet property="floatMenuItem" destination="K9G-rm-oBc" id="t9b-U7-W7t"/>
                 <outlet property="imageView" destination="b4i-Qc-XiU" id="J1t-bb-GdL"/>
+                <outlet property="nextImageMenuItem" destination="8jR-9P-jEK" id="hvE-bC-EvS"/>
+                <outlet property="previousImageMenuItem" destination="nzY-W8-cZb" id="G9l-0D-siC"/>
                 <outlet property="shadowMenuItem" destination="G9G-Nq-lnw" id="xMq-en-XNv"/>
                 <outlet property="shadowMenuItemTriggered" destination="G9G-Nq-lnw" id="HkV-tM-T46"/>
                 <outlet property="visualEffectView" destination="FnF-M0-aR2" id="CdH-QU-eFc"/>
@@ -346,6 +348,19 @@
                                 <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                 <connections>
                                     <action selector="backgroundMenuItemTriggered:" target="Voe-Tx-rLC" id="HlM-nx-rq4"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Nnw-te-1bV"/>
+                            <menuItem title="Next Image" keyEquivalent="" id="8jR-9P-jEK">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="nextImageMenuItemTriggered:" target="Voe-Tx-rLC" id="aQh-Yo-khN"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Previous Image" keyEquivalent="" id="nzY-W8-cZb">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="previousImageMenuItemTriggered:" target="Voe-Tx-rLC" id="fEx-xb-vpA"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="U64-Vf-sJt"/>
