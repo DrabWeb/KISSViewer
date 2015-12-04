@@ -237,9 +237,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Set the window frame to match the image size
         window.setFrame(NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height), display: false);
         
-        // Set the window aspect ratio to the image size
-        window.aspectRatio = NSSize(width: window.frame.width, height: window.frame.height);
-        
         // If we dont want to resize...
         if(!resize) {
             // Get the aspect ratio of the image
@@ -250,8 +247,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             // Set the windows frame tobe similar to the last one
             window.setFrame(NSRect(x: oldOrigin.x, y: oldOrigin.y, width: width, height: oldHeight), display: false);
-            
         }
+        
+        // Set the window aspect ratio to the image size
+        window.aspectRatio = NSSize(width: image.size.width, height: image.size.height);
         
         // If we want to resize...
         if(resize) {
