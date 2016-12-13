@@ -3,6 +3,9 @@
 
 A KISS image viewer for OSX.
 
+## Outdated
+This project is old and outdated, use [https://github.com/DrabWeb/macfeh](https://github.com/DrabWeb/macfeh) instead
+
 ### Features
 - A minimal, borderless rounded image window
 - Open multiple images and scroll through them (Great for Manga)
